@@ -1,0 +1,14 @@
+<div class="matchWrapper">
+    <app-avatar class="avatar" [userImage]="currentUserImage"></app-avatar>
+    <app-avatar class="avatar" [userImage]="matchedUserImage"></app-avatar>
+    <h1>
+      This is your match
+    </h1>
+    <p>
+      <strong>Get in contact with Pepito Perez</strong><br>Use this tools to plan your shared lunch <br>Phone number, E-mail<br>
+    </p>
+    <p><strong>Good look!</strong></p>
+    <input type="button" value="Cancel latch" (click)="cancelLunch()">
+    <input type="button" value="Rate lunch" (click)="rateLunch()">
+  </div>
+ <!-- <pre>{{currentUser | json}}</pre> -->

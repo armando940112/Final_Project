@@ -1,0 +1,54 @@
+<form [formGroup]="myForm">
+    <div class="example-container">
+        <mat-form-field>
+                <input matInput placeholder="First Name" formControlName="firstName" type="text" required>
+              </mat-form-field>
+        <mat-form-field>
+                <input matInput placeholder="Last Name" formControlName="lastName" type="text" required>
+              </mat-form-field>
+        <mat-form-field>
+                <input matInput placeholder="Company email" formControlName="companyEmail"  required>
+                <mat-error *ngIf="myForm.get('companyEmail').touched && myForm.get('companyEmail').invalid">sdfdsfd</mat-error>
+                </mat-form-field>
+
+    <div formGroupName="passwordGroup" class="example-container">
+        <mat-form-field>
+            <input matInput placeholder="Password" formControlName="password" type="password" required>
+        </mat-form-field>
+        <mat-form-field>
+            <input matInput placeholder="Confirm Password" formControlName="passwordConfirmation" type="password" required>
+        </mat-form-field>
+    </div>
+    <mat-error *ngIf="myForm.get('passwordGroup').errors !== null  && myForm.get('passwordGroup').get('password').touched && myForm.get('passwordGroup').get('passwordConfirmation').touched && myForm.get('passwordGroup').errors.validPassword">Passwords don't match</mat-error>
+
+        <mat-form-field>
+                <input matInput placeholder="Area" formControlName="area" type="text" required>
+              </mat-form-field>
+
+        <mat-form-field>
+                <input matInput placeholder="Description" formControlName="description" type="text" required>
+              </mat-form-field>
+
+        <mat-form-field>
+                <input matInput placeholder="Phone" formControlName="phone" type="text" required>
+              </mat-form-field>
+
+        <mat-form-field>
+            <input matInput placeholder="Select your interest" formControlName="interest" type="text" required>
+        </mat-form-field>
+
+        <mat-form-field>
+            <input matInput placeholder="Location" formControlName="location" type="text" required>
+        </mat-form-field>
+
+        <div>
+            <button mat-raised-button color="primary" (click)="register()" [disabled]="!myForm.valid">Enter</button>
+        </div>
+    </div>
+</form>
+
+
+
+
+
+

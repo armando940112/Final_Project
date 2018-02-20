@@ -1,0 +1,10 @@
+.random-face {
+    height: 30vh;
+    margin: 1rem;
+    border-radius: 50%;
+    background-color: paleturquoise;
+  }
+
+  div.avatarWrapper {
+    text-align: center;
+  }
