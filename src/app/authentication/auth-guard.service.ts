@@ -3,7 +3,7 @@ import { Injectable } from '@angular/core';
 import { CanActivate, Router, ActivatedRouteSnapshot, RouterStateSnapshot } from '@angular/router';
 
 @Injectable()
-export class AuthGuardService implements CanActivate{
+export class AuthGuardService implements CanActivate {
 
   constructor(private authService: AuthenticationService, private router: Router) { }
 
@@ -19,7 +19,7 @@ export class AuthGuardService implements CanActivate{
     this.authService.redirectUrl = url;
 
     // Create a dummy session id
-    let sessionId = 123456789;
+    const sessionId = 123456789;
 
     // Set our navigation extras object
     // that contains our global query params and fragment
@@ -31,7 +31,7 @@ export class AuthGuardService implements CanActivate{
 
     // Navigate to the login page with extras
     this.router.navigateByUrl('');
-    //this.router.navigate(['/login'], navigationExtras);
+    // this.router.navigate(['/login'], navigationExtras);
     return false;
   }
 
