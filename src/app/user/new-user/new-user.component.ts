@@ -3,6 +3,7 @@ import { UserService } from './../user.service';
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl, Validators, AbstractControl } from '@angular/forms';
 import { Router } from '@angular/router';
+import { AuthenticationService } from '../../authentication/authentication.service';
 
 @Component({
   selector: 'app-new-user',
@@ -11,8 +12,9 @@ import { Router } from '@angular/router';
 })
 export class NewUserComponent implements OnInit {
   myForm: FormGroup;
-
-  constructor(private router: Router, private userService: UserService) {
+  location: [{}];
+  interests: [string];
+  constructor(private router: Router, private userService: UserService, private authService: AuthenticationService) {
   }
 
   ngOnInit(): void {
@@ -27,15 +29,33 @@ export class NewUserComponent implements OnInit {
       area: new FormControl(),
       phone: new FormControl(),
       description: new FormControl(),
-      interest: new FormControl(),
+      Vegetables: new FormControl(),
+      Movies: new FormControl(),
+      Music: new FormControl(),
+      Sports: new FormControl(),
+      Food: new FormControl(),
+      Coffee: new FormControl(),
       location: new FormControl()
     });
+    this.initLocation();
+    this.initInterests();
+  }
+
+  initLocation() {
+    this.location = [
+      { value: 0, description: 'Yuxi' },
+      { value: 1, description: 'Outside' },
+      { value: 2, description: 'Both' },
+    ];
+  }
+
+  initInterests() {
+    this.interests = ['Vegetables', 'Movies', 'Music', 'Sports', 'Food', 'Coffee'];
   }
 
   validatePassword(control: AbstractControl) {
     const password = control.get('password');
     const passwordConfirmation = control.get('passwordConfirmation');
-    console.log(control);
     if (password.value === passwordConfirmation.value) {
       control.setErrors(null);
     } else {
@@ -48,8 +68,9 @@ export class NewUserComponent implements OnInit {
       const newUser: IUser = this.getFormData();
       console.log(newUser);
       this.userService.createUser(newUser).subscribe(
-        (x) => {
-          console.log(x);
+        (user: IUser) => {
+          this.authService.isLoggedIn = true;
+          this.userService.setUser(user, true);
           this.router.navigateByUrl('home');
         },
         (error) => {
@@ -59,18 +80,16 @@ export class NewUserComponent implements OnInit {
   }
 
   getFormData(): IUser {
-      const companyEmail: string = this.myForm.get('companyEmail').value;
-      const interests = ['Vegetables', 'Movies'];
       const newUser: IUser = {
         id: null,
         available: true,
         firstName: this.myForm.get('firstName').value,
         lastName: this.myForm.get('lastName').value,
-        email: companyEmail,
+        email: this.myForm.get('companyEmail').value,
         password: this.myForm.get('passwordGroup').get('password').value,
         area: this.myForm.get('area').value,
         phone: this.myForm.get('phone').value,
-        interests: interests,
+        interests: this.getSelectedInterests(),
         description: this.myForm.get('description').value,
         location: this.myForm.get('location').value,
         currentMatch: null,
@@ -83,5 +102,16 @@ export class NewUserComponent implements OnInit {
         }]
       };
       return newUser;
+  }
+
+  getSelectedInterests(): string[] {
+    const selectedInterests: string[] = [];
+    this.interests.map(interest => {
+      const interestValue = this.myForm.get(interest).value;
+      if (interestValue === true) {
+        selectedInterests.push(interest);
+      }
+    });
+    return selectedInterests;
   }
 }

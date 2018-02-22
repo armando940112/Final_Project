@@ -1,9 +1,9 @@
-.example-container {
-    display: flex;
-    flex-direction: column;
+.logo {
+  height: 30vh;
+  margin: 1rem;
+  border-radius: 50%;
+}
 
-  }
-
-  .example-container > * {
-    width: 70%;
-  }
+.form-input{
+  width: 400px;
+}

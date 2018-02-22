@@ -1,25 +1,25 @@
-<div class="noMatchWrapper">
-    <app-avatar class="avatar" [userImage]="currentUserImage"></app-avatar>
-    <app-avatar class="avatar" [userImage]="null"></app-avatar>
-    <h1>
-      No match
-    </h1>
-    <p>
-      <strong>Keep it cool</strong><br>Our team is working in the next <br>shared lunch experience<br>
+<div class="wrapper">
+    <div class="container">
+        <app-avatar class="avatar"
+                    [userImage]="currentUserImage"></app-avatar>
+        <app-avatar class="avatar"
+                    [userImage]="null"></app-avatar>
 
-    </p>
-    <p><strong>Status</strong>: {{currentUser.available? 'Available': 'Unavailable'}}<br>for your next lunch.</p>
-    <input type="button" value="Change status" (click)="changeStatus()">
-    <input type="button" value="Match" (click)="match()">
+        <h1>
+            No match
+        </h1>
+        <p>
+            <strong>Keep it cool</strong><br>Our team is working in the next <br>shared lunch experience<br>
+
+        </p>
+        <p><strong>Status</strong>: {{currentUser.available? 'Available': 'Unavailable'}}<br>for your next lunch.</p>
+        <div>
+            <button mat-raised-button
+                    color="primary"
+                    (click)="changeStatus()">Change status</button>
+            <button mat-raised-button
+                    color="primary"
+                    (click)="match()">Match</button>
+        </div>
+    </div>
 </div>
-
-<!-- <h1>RANDOM USER</h1>
-<pre>
-  {{matchedUser | json}}
-</pre>
-
-
-<h1>CURRENT USER</h1>
-<pre>
-  {{currentUser | json}}
-</pre> -->

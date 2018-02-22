@@ -1,27 +1,39 @@
-<div class="logoWrapper">
-    <img class="logo" src="./assets/logosplash.png">
-</div>
+<div class="wrapper">
+    <div class="container">
+        <img class="logo"
+             src="./assets/logosmall.png">
+        <form [formGroup]="myForm">
+            <div>
+                <mat-form-field style="width:380px;">
+                    <input matInput
+                           placeholder="Company email"
+                           formControlName="email"
+                           required>
+                    <mat-error *ngIf="myForm.get('email').touched && myForm.get('email').invalid">{{getErrorMessage()}}</mat-error>
+                </mat-form-field>
+            </div>
+            <div>
+                <mat-form-field style="width:380px;">
+                    <input matInput
+                           placeholder="Password"
+                           formControlName="password"
+                           type="password"
+                           required>
+                </mat-form-field>
+            </div>
+            <div>
+                <button mat-raised-button
+                        color="primary"
+                        (click)="logIn()"
+                        [disabled]="!myForm.valid">LOG IN</button>
 
-
-  <form [formGroup]="myForm">
-      <div class="example-container">
-           <mat-form-field>
-        <input matInput placeholder="Company email" formControlName="email"  required>
-        <mat-error *ngIf="myForm.get('email').touched && myForm.get('email').invalid">{{getErrorMessage()}}</mat-error>
-        </mat-form-field>
-
-        <mat-form-field>
-            <input matInput placeholder="Password" formControlName="password" type="password" required>
-          </mat-form-field>
-      <div>
-        <button mat-raised-button color="primary" (click)="logIn()" [disabled]="!myForm.valid">LOG IN</button>
-        <button mat-raised-button color="primary" (click)="register()">I'M NEW</button>
-      </div>
+                <button mat-raised-button
+                        color="primary"
+                        [routerLink]="['/signup']">I'M NEW</button>
+            </div>
+            <div *ngIf="invalidLogin">
+                <p>Incorrect credentials, please correct them.</p>
+            </div>
+        </form>
     </div>
-    <div *ngIf="invalidLogin"><p>Incorrect credentials, please correct them.</p></div>
-  </form>
-
-
-
-
-
+</div>

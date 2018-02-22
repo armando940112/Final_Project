@@ -22,6 +22,9 @@ export class AuthenticationComponent implements OnInit {
   }
 
   ngOnInit() {
+    this.userService.getAllUsers().subscribe(
+      users => console.log(users)
+    );
   }
 
   register() {
@@ -37,7 +40,7 @@ export class AuthenticationComponent implements OnInit {
           this.currentUser = users.find(user => user.email === email && user.password === password);
           if (this.currentUser) {
             this.authService.isLoggedIn = true;
-            localStorage.setItem('currentUser', JSON.stringify(this.currentUser));
+            this.userService.setUser(this.currentUser, true);
             this.redirectToHome();
           } else {
             this.invalidLogin = true;

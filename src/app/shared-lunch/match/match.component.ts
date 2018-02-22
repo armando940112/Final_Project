@@ -1,3 +1,4 @@
+import { UserService } from './../../user/user.service';
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { IUser } from '../../user.interface';
@@ -10,18 +11,31 @@ import { IUser } from '../../user.interface';
 export class MatchComponent implements OnInit {
   currentUser: IUser;
   currentUserImage: string;
+  matchedUser: IUser;
   matchedUserImage: string;
-  constructor(private router: Router) { }
+  constructor(private router: Router, private userService: UserService) { }
 
   ngOnInit() {
-    console.log('entró al MATCH');
-    this.currentUser = JSON.parse(localStorage.getItem('currentUser'));
-    this.currentUserImage = 'https://api.adorable.io/avatars/400/@adorable.io.png';
-    this.matchedUserImage = 'https://api.adorable.io/avatars/400/2@adorable.io.png';
+    this.initCurrentUser();
+    this.initMatchedUser();
+  }
+
+  initCurrentUser() {
+    this.currentUser = this.userService.getUser(true);
+    this.currentUserImage = this.userService.getUserImage(true);
+  }
+
+  initMatchedUser() {
+    this.userService.get(this.currentUser.currentMatch)
+      .subscribe(user => {
+        this.matchedUser = user[0];
+        this.userService.setUser(this.matchedUser, false);
+        this.matchedUserImage = this.userService.getUserImage(false);
+      });
   }
 
   cancelLunch() {
-    alert('Canceling lunch');
+    this.router.navigateByUrl('home/message');
   }
 
   rateLunch() {

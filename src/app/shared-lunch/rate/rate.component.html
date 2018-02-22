@@ -1,11 +1,39 @@
-<div class="rateWrapper">
-    <app-avatar class="avatar" [userImage]="matchedUserImage"></app-avatar>
-    <h1>
-      How was your lunch?
-    </h1>
-    <p>
-      How was your lunch with Pepito Perez<br>Hope it was an awesome experience.
-    </p>
-    <p><strong>Help us by Rating your experience</strong></p>
-    <input type="button" value="Ok" (click)="finishMatch()">
+<div class="wrapper">
+    <div class="container">
+        <app-avatar class="avatar"
+                    [userImage]="matchedUserImage"></app-avatar>
+        <form #myForm="ngForm">
+
+            <h1>
+                How was your lunch?
+            </h1>
+            <p>
+                How was your lunch with {{matchedUser.firstName + ' ' + matchedUser.lastName}}<br>Hope it was an awesome experience.
+            </p>
+            <p><strong>Help us by Rating your experience</strong></p>
+            <div>
+                <mat-select style="width: 380px;"
+                            placeholder="Rate Lunch"
+                            [(ngModel)]="rate"
+                            name="rateSelect"
+                            required>
+                    <mat-option *ngFor="let option of rateOptions"
+                                [value]="option.value">
+                        {{option.description}}
+                    </mat-option>
+                </mat-select>
+            </div>
+
+            <div>
+                <button mat-raised-button
+                        color="primary"
+                        (click)="cancel()">Cancel</button>
+
+                <button mat-raised-button
+                        color="primary"
+                        (click)="rateMatch()"
+                        [disabled]="!myForm.valid">Ok</button>
+            </div>
+        </form>
+    </div>
 </div>

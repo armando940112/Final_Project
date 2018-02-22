@@ -11,10 +11,10 @@ export interface IUser {
     description: string;
     location: number;
     currentMatch: number;
-    matches: Match[];
+    matches: IMatch[];
   }
 
-  export interface Match {
+  export interface IMatch {
     id: number;
     date: string;
     rate: number;

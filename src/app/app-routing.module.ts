@@ -1,3 +1,4 @@
+import { MessageComponent } from './shared-lunch/message/message.component';
 import { NewUserComponent } from './user/new-user/new-user.component';
 import { RateComponent } from './shared-lunch/rate/rate.component';
 import { MatchComponent } from './shared-lunch/match/match.component';
@@ -11,37 +12,8 @@ import { AuthGuardService } from './authentication/auth-guard.service';
 import { AuthenticationComponent } from './authentication/authentication.component';
 
 const routes: Routes = [
-  {
-    path: '',
-    component: AuthenticationComponent
-  },
-  {
-    path: 'signup',
-    component: NewUserComponent,
-  },
-  {
-    path: 'home',
-    component: HomeComponent,
-    canActivate: [AuthGuardService],
-    children: [
-      {
-        path: '',
-        component: NoMatchComponent,
-      },
-      {
-        path: 'match',
-        component: MatchComponent
-      },
-      {
-        path: 'rate',
-        component: RateComponent,
-      }
-    ]
-  },
   { path: '**', component: PageNotFoundComponent }
 ];
-
-
 
 @NgModule({
   imports: [

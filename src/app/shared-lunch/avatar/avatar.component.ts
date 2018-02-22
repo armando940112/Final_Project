@@ -12,11 +12,6 @@ export class AvatarComponent implements OnInit {
   constructor() { }
 
   ngOnInit() {
-    this.imageUrl = this.userImage !== null ? this.userImage : './assets/icon-face.png';
-    console.log(this.imageUrl);
+    this.imageUrl = this.userImage !== null ? this.userImage : './assets/unknown.png';
   }
-
-
-
-
 }

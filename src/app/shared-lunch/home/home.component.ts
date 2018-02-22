@@ -10,17 +10,15 @@ import { IUser } from '../../user.interface';
   styleUrls: ['./home.component.css']
 })
 export class HomeComponent implements OnInit {
-  //constructor(private router: Router, private route: ActivatedRoute) {
-  currentUser: IUser;
   // tslint:disable-next-line:max-line-length
+  currentUser: IUser;
+  currentUserImage: string;
   constructor(private router: Router, private userService: UserService, private authService: AuthenticationService) {
-    // console.log(this.userService.loggedUser);
-    // this.currentUser = JSON.parse(localStorage.getItem('currentUser'));
-    console.log('Entro al home');
-
   }
 
   ngOnInit() {
+    this.currentUser = this.userService.getUser(true);
+    this.currentUserImage = this.userService.getUserImage(true);
   }
 
   signOut() {

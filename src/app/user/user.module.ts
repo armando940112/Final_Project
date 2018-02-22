@@ -1,3 +1,4 @@
+import { UserRoutingModule } from './user-routing.module';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { NewUserComponent } from './new-user/new-user.component';
@@ -6,9 +7,9 @@ import { AppCommonModule } from '../app-common.module';
 
 @NgModule({
   imports: [
-    CommonModule, AppCommonModule
+    CommonModule, AppCommonModule, UserRoutingModule
   ],
   declarations: [NewUserComponent],
-  providers: [UserService]
+  providers: []
 })
 export class UserModule { }

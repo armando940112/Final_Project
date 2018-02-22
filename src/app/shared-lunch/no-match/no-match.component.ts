@@ -17,15 +17,17 @@ export class NoMatchComponent implements OnInit {
   }
 
   ngOnInit() {
-    console.log('entró al nomatch');
-    this.currentUser = JSON.parse(localStorage.getItem('currentUser'));
-    this.currentUserImage = 'https://api.adorable.io/avatars/400/@adorable.io.png';
+    this.currentUser = this.userService.getUser(true);
+    this.currentUserImage = this.userService.getUserImage(true);
+    this.userService.getAllUsers().subscribe(
+      users => console.log(users)
+    );
   }
 
   changeStatus() {
     this.currentUser.available = !this.currentUser.available;
     this.userService.put(this.currentUser).subscribe((x) => {
-      localStorage.setItem('currentUser', JSON.stringify(this.currentUser));
+      this.userService.setUser(this.currentUser, true);
     },
     (error: any) => console.log(error));
   }
@@ -35,21 +37,19 @@ export class NoMatchComponent implements OnInit {
       const filteredUsers = users.filter(user =>
         user.id !== this.currentUser.id && user.available === true && user.currentMatch === null
       );
-      const filtedUsersWithLocation = filteredUsers.filter(user =>
-        user.location === this.currentUser.location
-      );
 
-      const finalUsers = filtedUsersWithLocation.length > 0 ? filtedUsersWithLocation : filteredUsers;
-      this.matchedUser = finalUsers[
-        Math.floor(Math.random() * finalUsers.length)
+      this.matchedUser = filteredUsers[
+        Math.floor(Math.random() * filteredUsers.length)
       ];
 
       this.currentUser.currentMatch = this.matchedUser.id;
       this.matchedUser.currentMatch = this.currentUser.id;
 
       this.userService.put(this.currentUser).subscribe((x) => {
-        localStorage.setItem('currentUser', JSON.stringify(this.currentUser));
-        this.userService.put(this.matchedUser).subscribe(() => this.router.navigateByUrl('home/match'));
+        this.userService.setUser(this.currentUser, true);
+        this.userService.put(this.matchedUser).subscribe(() => {
+          this.router.navigateByUrl('home/match');
+        });
       });
     });
 

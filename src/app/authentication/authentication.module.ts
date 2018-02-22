@@ -1,3 +1,4 @@
+import { AuthenticationRoutingModule } from './authentication-routing.module';
 import { AppCommonModule } from './../app-common.module';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
@@ -7,7 +8,7 @@ import { AuthGuardService } from './auth-guard.service';
 
 @NgModule({
   imports: [
-    CommonModule, AppCommonModule
+    CommonModule, AppCommonModule, AuthenticationRoutingModule
   ],
   declarations: [AuthenticationComponent],
   providers: [AuthenticationService, AuthGuardService]

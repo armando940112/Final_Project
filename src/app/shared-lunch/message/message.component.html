@@ -1,0 +1,40 @@
+<div class="wrapper">
+    <div class="container">
+        <form #myForm="ngForm">
+            <h2>
+                Message to Match
+            </h2>
+            <div>
+                <mat-form-field style="width: 380px;">
+                    <textarea matInput
+                              placeholder="Send a message to your match about why you have to cancel the lunch"
+                              [(ngModel)]="messateToMatch"
+                              name="messageToMatch"
+                              required></textarea>
+                </mat-form-field>
+            </div>
+            <h2>
+                Message to HR
+            </h2>
+            <div>
+                <mat-form-field style="width: 380px;">
+                    <textarea matInput
+                              placeholder="Send a message to HR about why you have to cancel the lunch// This message is private"
+                              [(ngModel)]="messateToHR"
+                              name="messateToHR"
+                              required></textarea>
+                </mat-form-field>
+            </div>
+            <div>
+                <button mat-raised-button
+                        color="primary"
+                        (click)="cancel()">Cancel</button>
+
+                <button mat-raised-button
+                        color="primary"
+                        (click)="sendMessage()"
+                        [disabled]="!myForm.valid">Send</button>
+            </div>
+        </form>
+    </div>
+</div>

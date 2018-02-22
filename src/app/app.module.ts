@@ -1,3 +1,4 @@
+import { UserService } from './user/user.service';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { UserModule } from './user/user.module';
 import { SharedLunchModule } from './shared-lunch/shared-lunch.module';
@@ -17,12 +18,11 @@ import { AppRoutingModule } from './app-routing.module';
     PageNotFoundComponent
   ],
   imports: [
-    BrowserModule, AuthenticationModule, AppRoutingModule, SharedLunchModule, UserModule,
-    HttpClientModule,
+    BrowserModule, AuthenticationModule, UserModule, SharedLunchModule, AppRoutingModule, HttpClientModule,
     HttpClientInMemoryWebApiModule.forRoot(MemoryUserService),
     BrowserAnimationsModule
   ],
-  providers: [],
+  providers: [UserService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

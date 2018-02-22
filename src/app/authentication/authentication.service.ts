@@ -6,22 +6,19 @@ import { IUser } from '../user.interface';
 
 @Injectable()
 export class AuthenticationService {
-
-  constructor(private userService: UserService, private router: Router) {
-
-  }
   isLoggedIn = false;
+  constructor(private userService: UserService, private router: Router) {
+  }
 
-  // store the URL so we can redirect after logging in
-  redirectUrl = '';
-
+  //This was the initial method to log in but because of the web memory API I had to bring all users and then find the user in that list
   // login(userName: string, password: string): Observable<IUser[]> {
   //   return this.userService.getUser(userName, password);
   // }
 
   logout(): void {
     this.isLoggedIn = false;
-    localStorage.removeItem('currentUser');
+    this.userService.clearUser(true);
+    this.userService.clearUser(false);
   }
 
 }

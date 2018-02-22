@@ -1,7 +1,49 @@
-<input type="button" value="Sign Out" (click)="signOut()">
+<mat-sidenav-container class="example-container">
+    <mat-sidenav #sidenav
+                 [mode]="">
+        <p><button mat-button
+                    (click)="sidenav.toggle()">Close</button></p>
 
-<router-outlet></router-outlet>
+            <mat-toolbar color="">
+                <mat-toolbar-row style="height: 200px;">
+                        <app-avatar class="avatar" style="width: 215px;"
+                        [userImage]="currentUserImage"></app-avatar>
+                    <p><strong>{{currentUser.firstName + ' ' + currentUser.lastName}}</strong><br>{{currentUser.area}} / Team</p>
+                </mat-toolbar-row>
+                <mat-toolbar-row>
+                    <img src="./assets/icon-match.png" class="menuIcons"
+                         alt="">
+                    <span>Match</span>
+                </mat-toolbar-row>
 
-<!-- <pre>{{currentUser | json}}</pre> -->
-
-
+                <mat-toolbar-row>
+                    <img src="./assets/icon-history.png" class="menuIcons"
+                         alt="">
+                    <span>History</span>
+                </mat-toolbar-row>
+                <mat-toolbar-row>
+                    <img src="./assets/icon-userlist.png" class="menuIcons"
+                         alt="">
+                    <span>Colleagues list</span>
+                </mat-toolbar-row>
+                <mat-toolbar-row>
+                    <img src="./assets/icon-settings.png" class="menuIcons"
+                         alt="">
+                    <span>Settings</span>
+                </mat-toolbar-row>
+                <mat-toolbar-row>
+                        <img src="./assets/icon-logout.png" alt="" class="menuIcons" (click)="signOut()">
+                    <span>Log out</span>
+                </mat-toolbar-row>
+            </mat-toolbar>
+    </mat-sidenav>
+    <mat-sidenav-content>
+        <p><button mat-button
+                    (click)="sidenav.toggle()">Menu</button></p>
+        <button mat-button
+                (click)="sidenav.toggle()"></button>
+        <!-- <p> -->
+            <router-outlet></router-outlet>
+        <!-- </p> -->
+    </mat-sidenav-content>
+</mat-sidenav-container>
